@@ -10,17 +10,21 @@
  * http://www.pimcore.org/license
  *
  * @category   Pimcore
- * @package    Object_Class
+ * @package    Object|Class
  * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
  * @license    http://www.pimcore.org/license     New BSD License
  */
 
-class Object_Class_Data_NewsletterActive extends Object_Class_Data_Checkbox {
+namespace Pimcore\Model\Object\ClassDefinition\Data;
+
+use Pimcore\Model;
+
+class NewsletterConfirmed extends Model\Object\ClassDefinition\Data\Checkbox {
 
     /**
      * Static type of this element
      *
      * @var string
      */
-    public $fieldtype = "newsletterActive";
+    public $fieldtype = "newsletterConfirmed";
 }
