@@ -15,16 +15,16 @@
  * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
-namespace Pimcore\Model\Object\ClassDefinition\Data;
+namespace Pimcore\Model\DataObject\ClassDefinition\Data;
 
 use Pimcore\Model;
 
-class NewsletterActive extends Model\Object\ClassDefinition\Data\Checkbox
+class NewsletterConfirmed extends Model\DataObject\ClassDefinition\Data\Checkbox
 {
     /**
      * Static type of this element
      *
      * @var string
      */
-    public $fieldtype = 'newsletterActive';
+    public $fieldtype = 'newsletterConfirmed';
 }
