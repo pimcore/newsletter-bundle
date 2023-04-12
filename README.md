@@ -100,4 +100,4 @@ This bundle also adds a new twig extension. For more information checkout the ma
 
 ## Contributing and Development
 
-For details see our [Contributing guide](./CONTRIBUTING.md).
+For details see our [Contributing guide](https://github.com/pimcore/newsletter-bundle/blob/1.x/CONTRIBUTING.md).
