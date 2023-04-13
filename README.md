@@ -1,6 +1,6 @@
 ---
 title: Newsletter Module
----
+---  dd
 
 
 # Pimcore Newsletter Bundle
