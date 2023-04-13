@@ -1,3 +1,8 @@
+---
+title: Newsletter Module
+---
+
+
 # Pimcore Newsletter Bundle
 This bundle provides a basic newsletter framework with the advantage to use all the data that is already stored in the system.
 
