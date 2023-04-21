@@ -20,3 +20,5 @@ newsletter_test_sent_message: 'Test Newsletter sent successfully'
 newsletter_choose_report: 'Choose a report'
 newsletter_email_field_name: 'Email field name'
 newsletter_report: 'Custom Report'
+newsletter_active: Newsletter Active
+newsletter_confirmed: Newsletter Confirmed
