@@ -25,7 +25,6 @@ use Pimcore\Bundle\NewsletterBundle\Model\DataObject\ClassDefinition\Data\Newsle
 use Pimcore\Bundle\NewsletterBundle\Model\DataObject\ClassDefinition\Data\NewsletterConfirmed;
 use Pimcore\Bundle\NewsletterBundle\Model\Document\Newsletter;
 use Pimcore\Bundle\NewsletterBundle\Tool\Newsletter as NewsletterTool;
-use Pimcore\Controller\Traits\JsonHelperTrait;
 use Pimcore\Model\DataObject\ClassDefinition\Data\Email;
 use Pimcore\Model\DataObject\ClassDefinition\Listing;
 use Pimcore\Model\Document;
