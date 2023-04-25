@@ -1,4 +1,4 @@
-# Newsletter
+# Newsletter Configuration
 
 ## General
 The main advantage is that you can send completely customized / personalized newsletters by using all the data stored 
