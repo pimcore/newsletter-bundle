@@ -16,16 +16,18 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\NewsletterBundle;
 
-use Pimcore\Bundle\AdminBundle\Support\BundleAdminSupportTrait;
-use Pimcore\Bundle\AdminBundle\Support\PimcoreBundleAdminSupportInterface;
+use Pimcore\Bundle\AdminBundle\PimcoreAdminBundle;
 use Pimcore\Bundle\NewsletterBundle\DependencyInjection\Compiler\CustomReportsPass;
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
+use Pimcore\Extension\Bundle\PimcoreBundleAdminClassicInterface;
+use Pimcore\Extension\Bundle\Traits\BundleAdminClassicTrait;
 use Pimcore\Extension\Bundle\Traits\PackageVersionTrait;
+use Pimcore\HttpKernel\BundleCollection\BundleCollection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class PimcoreNewsletterBundle extends AbstractPimcoreBundle implements PimcoreBundleAdminSupportInterface
+class PimcoreNewsletterBundle extends AbstractPimcoreBundle implements PimcoreBundleAdminClassicInterface
 {
-    use BundleAdminSupportTrait;
+    use BundleAdminClassicTrait;
     use PackageVersionTrait;
 
     public function getJsPaths(): array
@@ -76,5 +78,10 @@ class PimcoreNewsletterBundle extends AbstractPimcoreBundle implements PimcoreBu
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new CustomReportsPass());
+    }
+
+    public static function registerDependentBundles(BundleCollection $collection): void
+    {
+        $collection->addBundle(new PimcoreAdminBundle(), 60);
     }
 }

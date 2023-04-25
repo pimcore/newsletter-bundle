@@ -114,7 +114,7 @@ class NewsletterController extends DocumentControllerBase
         if ($task === self::TASK_PUBLISH || $task === self::TASK_UNPUBLISH) {
             $treeData = $this->getTreeNodeConfig($page);
 
-            return $this->adminJson([
+            return $this->jsonResponse([
                 'success' => true,
                 'data' => [
                     'versionDate' => $page->getModificationDate(),
@@ -133,7 +133,7 @@ class NewsletterController extends DocumentControllerBase
             ];
         }
 
-        return $this->adminJson(['success' => true, 'draft' => $draftData]);
+        return $this->jsonResponse(['success' => true, 'draft' => $draftData]);
     }
 
     protected function setValuesToDocument(Request $request, Document $document): void
@@ -179,7 +179,7 @@ class NewsletterController extends DocumentControllerBase
         } catch (Exception $e) {
         }
 
-        return $this->adminJson([
+        return $this->jsonResponse([
             'count' => $count,
             'success' => $success,
         ]);
@@ -212,7 +212,7 @@ class NewsletterController extends DocumentControllerBase
             }
         }
 
-        return $this->adminJson(['data' => $availableClasses]);
+        return $this->jsonResponse(['data' => $availableClasses]);
     }
 
     /**
@@ -236,7 +236,7 @@ class NewsletterController extends DocumentControllerBase
                 $availableReports[] = ['id' => $report['id'], 'text' => $report['text']];
             }
 
-            return $this->adminJson(['data' => $availableReports]);
+            return $this->jsonResponse(['data' => $availableReports]);
         }
 
         if ($task === 'fieldNames') {
@@ -251,10 +251,10 @@ class NewsletterController extends DocumentControllerBase
                 }
             }
 
-            return $this->adminJson(['data' => $availableColumns]);
+            return $this->jsonResponse(['data' => $availableColumns]);
         }
 
-        return $this->adminJson(['success' => false]);
+        return $this->jsonResponse(['success' => false]);
     }
 
     /**
@@ -274,7 +274,7 @@ class NewsletterController extends DocumentControllerBase
         }
         $data = TmpStore::get($document->getTmpStoreId());
 
-        return $this->adminJson([
+        return $this->jsonResponse([
             'data' => $data ? $data->getData() : null,
             'success' => true,
         ]);
@@ -297,7 +297,7 @@ class NewsletterController extends DocumentControllerBase
         }
         TmpStore::delete($document->getTmpStoreId());
 
-        return $this->adminJson([
+        return $this->jsonResponse([
             'success' => true,
         ]);
     }
@@ -337,7 +337,7 @@ class NewsletterController extends DocumentControllerBase
             new Pimcore\Bundle\NewsletterBundle\Messenger\SendNewsletterMessage($document->getTmpStoreId(), \Pimcore\Tool::getHostUrl())
         );
 
-        return $this->adminJson(['success' => true]);
+        return $this->jsonResponse(['success' => true]);
     }
 
     /**
@@ -361,14 +361,14 @@ class NewsletterController extends DocumentControllerBase
                 $addressSourceAdapterName
             );
 
-            return $this->adminJson(['success' => false, 'count' => '0', 'message' => $msg]);
+            return $this->jsonResponse(['success' => false, 'count' => '0', 'message' => $msg]);
         }
 
         /** @var AddressSourceAdapterFactoryInterface $addressAdapterFactory */
         $addressAdapterFactory = $serviceLocator->get($addressSourceAdapterName);
         $addressAdapter = $addressAdapterFactory->create($adapterParams);
 
-        return $this->adminJson(['success' => true, 'count' => $addressAdapter->getTotalRecordCount()]);
+        return $this->jsonResponse(['success' => true, 'count' => $addressAdapter->getTotalRecordCount()]);
     }
 
     /**
@@ -393,7 +393,7 @@ class NewsletterController extends DocumentControllerBase
         $testMailAddress = $request->get('testMailAddress');
 
         if (empty($testMailAddress)) {
-            return $this->adminJson([
+            return $this->jsonResponse([
                 'success' => false,
                 'message' => 'Please provide a valid email address to send test newsletter',
             ]);
@@ -402,7 +402,7 @@ class NewsletterController extends DocumentControllerBase
         $serviceLocator = \Pimcore::getContainer()->get('pimcore_newsletter.address_source_adapter.factories');
 
         if (!$serviceLocator->has($addressSourceAdapterName)) {
-            return $this->adminJson([
+            return $this->jsonResponse([
                 'success' => false,
                 'error' => sprintf(
                     'Cannot send newsletters because Address Source Adapter with identifier %s could not be found',
@@ -421,12 +421,12 @@ class NewsletterController extends DocumentControllerBase
             $mail = NewsletterTool::prepareMail($document);
             NewsletterTool::sendNewsletterDocumentBasedMail($mail, $sendingContainer);
         } catch (\Exception $e) {
-            return $this->adminJson([
+            return $this->jsonResponse([
                 'success' => false,
                 'error' => $e->getMessage(),
             ]);
         }
 
-        return $this->adminJson(['success' => true]);
+        return $this->jsonResponse(['success' => true]);
     }
 }
