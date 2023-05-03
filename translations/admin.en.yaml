@@ -1,4 +1,4 @@
-newsletter: Newsletter
+newsletter: 'Newsletter'
 add_newsletter: 'Add Newsletter'
 send_newsletter: 'Send Newsletter Now'
 send_test_newsletter: 'Send Test-Newsletter'
@@ -20,3 +20,5 @@ newsletter_test_sent_message: 'Test Newsletter sent successfully'
 newsletter_choose_report: 'Choose a report'
 newsletter_email_field_name: 'Email field name'
 newsletter_report: 'Custom Report'
+newsletter_active: 'Newsletter Active'
+newsletter_confirmed: 'Newsletter Confirmed'
