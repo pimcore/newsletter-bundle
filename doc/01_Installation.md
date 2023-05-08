@@ -80,14 +80,14 @@ You can also use the following command to clean up you database. Create a backup
 
 ## Best Practice and Example
 
-See [Newsletter](./doc/19_Newsletter.md) for a complete example and how to set up your newsletter.
+See [Newsletter Config](./19_Newsletter_Config.md) for a complete example and how to set up your newsletter.
 
 ## Document Types
 This bundle introduces a new document type:
 
 | Type                                           | Description                                   | 
 |------------------------------------------------|-----------------------------------------------|
-| [Newsletter](./doc/05_Newsletter_Documents.md) | Like an email but specialized for newsletter |
+| [Newsletter](./05_Newsletter_Documents.md) | Like an email but specialized for newsletter |
 
 ## Pimcore Twig Extensions
 This bundle also adds a new twig extension. For more information checkout the main documentation
