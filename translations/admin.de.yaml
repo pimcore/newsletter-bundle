@@ -26,5 +26,5 @@ newsletter_testsend: Newsletter-Testversand
 newsletter_test_sent_message: Test-Newsletter erfolgreich versendet
 newsletter_choose_report: "W\xE4hle ein Bericht"
 newsletter_email_field_name: E-Mail-Feldname
-newsletter_report: Custom Report
+newsletter_report: Individueller Bericht
 ...
