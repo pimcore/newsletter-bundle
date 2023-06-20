@@ -1,16 +1,16 @@
 ---
-newsletter_active: Newsletter Active
+newsletter_active: Newsletter active
 newsletter_confirmed: "Newsletter Valid\xE9e"
 newsletter: Newsletter
 add_newsletter: Ajouter une Newsletter
-send_newsletter: Envoyer la Newsletter Maintenant
+send_newsletter: Envoyer la Newsletter maintenant
 send_test_newsletter: Envoyer la Newsletter de test
-newsletter_send_error: Impossible d'envoyer votre newsletter, veuiller contacter votre
+newsletter_send_error: Impossible d'envoyer votre Newsletter, veuillez contacter votre
   administrateur !
 newsletter_sent_message: "Votre Newsletter est envoy\xE9e \xE0 tous les destinataires,
   ce traitement est r\xE9alis\xE9 en t\xE2che de fond (vous pouvez quitter pimcore)
   et peut durer jusqu'\xE0 une heure."
-do_you_really_want_to_send_the_newsletter_to_all_recipients: "Souhaitez vous vraiment
+do_you_really_want_to_send_the_newsletter_to_all_recipients: "Souhaitez-vous vraiment
   envoyer la Newsletter \xE0 tous les destinataires"
 newsletter_enableTrackingParameters: "Ajouter des Param\xE8tres de Suivi aux Liens"
 newsletter_sendingMode: Mode d'envoi
