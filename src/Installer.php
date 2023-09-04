@@ -119,7 +119,7 @@ class Installer extends SettingsStoreAwareInstaller
             $typeColumn = $result->fetchAllAssociative();
 
             return explode("','", preg_replace("/(enum)\('(.+?)'\)/", '\\2', $typeColumn[0]['Type']));
-        } catch (\Exception $ex) {
+        } catch (\Exception) {
             // nothing to do here if it does not work we return the standard types
         }
 
