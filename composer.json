@@ -13,6 +13,7 @@
   "prefer-stable": true,
   "minimum-stability": "dev",
   "require": {
+    "doctrine/dbal": "^3.6",
     "pimcore/pimcore": "^11.0",
     "pimcore/admin-ui-classic-bundle": "^1.1"
   },
