@@ -31,7 +31,7 @@ pimcore:
         type_definitions:
             map:
                 newsletter:
-                    class: Pimcore\Bundle\NewsletterBundle\Model\Document\Newsletter
+                    class: \Pimcore\Bundle\NewsletterBundle\Model\Document\Newsletter
                     translatable: false
                     valid_table: 'newsletter'
                     translatable_inheritance: false
