@@ -44,10 +44,9 @@ framework:
         enabled: true
         transports:
             pimcore_newsletter: smtp://user:pass@smtp.example.com:port
-        messenger:
-            routing:
-                'Pimcore\Bundle\NewsletterBundle\Messenger\SendNewsletterMessage': pimcore_core    
-
+    messenger:
+        routing:
+            'Pimcore\Bundle\NewsletterBundle\Messenger\SendNewsletterMessage': pimcore_core
 ```
 
 ```yaml
