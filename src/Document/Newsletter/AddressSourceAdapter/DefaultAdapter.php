@@ -100,6 +100,11 @@ class DefaultAdapter implements AddressSourceAdapterInterface
         $object = current($listing->load());
 
         return new SendingParamContainer($emailAddress, [
+            'gender' => method_exists($object, 'getGender') ? $object->getGender() : '',
+            'firstname' => method_exists($object, 'getFirstname') ? $object->getFirstname() : '',
+            'lastname' => method_exists($object, 'getLastname') ? $object->getLastname() : '',
+            'email' => $emailAddress,
+            'token' => 'token',
             'object' => $object,
         ]);
     }
