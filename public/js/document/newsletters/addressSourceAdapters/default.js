@@ -45,9 +45,9 @@ pimcore.bundle.newsletter.document.newsletters.addressSourceAdapters.default = C
                 defaults: {labelWidth: 200},
                 items: [
                     {
-                        xtype: "combo",
-                        name: "class",
-                        fieldLabel: t("class"),
+                        xtype: 'combo',
+                        name: 'class',
+                        fieldLabel: t('class'),
                         triggerAction: 'all',
                         editable: false,
                         store: new Ext.data.Store({
@@ -60,10 +60,19 @@ pimcore.bundle.newsletter.document.newsletters.addressSourceAdapters.default = C
                                     rootProperty: 'data'
                                 }
                             },
-                            fields: ["name"]
+                            fields: [
+                                'name',
+                                {
+                                    name: 'translatedName',
+                                    convert: function(v, rec){
+                                        return t(rec.data.name);
+                                    },
+                                    depends : ['name']
+                                }
+                            ]
                         }),
                         width: 600,
-                        displayField: 'name',
+                        displayField: 'translatedName',
                         valueField: 'name'
                     },{
                         xtype: "textfield",
