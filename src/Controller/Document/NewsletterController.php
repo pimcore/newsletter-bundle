@@ -418,7 +418,7 @@ class NewsletterController extends DocumentControllerBase
         $sendingContainer = $addressAdapter->getParamsForTestSending($testMailAddress);
 
         try {
-            $mail = NewsletterTool::prepareMail($document);
+            $mail = NewsletterTool::prepareMail($document, $sendingContainer);
             NewsletterTool::sendNewsletterDocumentBasedMail($mail, $sendingContainer);
         } catch (\Exception $e) {
             return $this->adminJson([
