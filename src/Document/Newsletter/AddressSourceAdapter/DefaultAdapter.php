@@ -18,6 +18,7 @@ namespace Pimcore\Bundle\NewsletterBundle\Document\Newsletter\AddressSourceAdapt
 
 use Pimcore\Bundle\NewsletterBundle\Document\Newsletter\AddressSourceAdapterInterface;
 use Pimcore\Bundle\NewsletterBundle\Document\Newsletter\SendingParamContainer;
+use Pimcore\Db;
 use Pimcore\Model\DataObject\ClassDefinition;
 use Pimcore\Model\DataObject\Listing;
 
@@ -30,7 +31,7 @@ class DefaultAdapter implements AddressSourceAdapterInterface
 
     protected ?string $condition = null;
 
-    protected int $elementsTotal;
+    protected int $elementsTotal = 0;
 
     protected ?Listing $list = null;
 
@@ -42,7 +43,7 @@ class DefaultAdapter implements AddressSourceAdapterInterface
 
     protected function getListing(): ?Listing
     {
-        if (empty($this->list)) {
+        if (null === $this->list) {
             $objectList = '\\Pimcore\\Model\\DataObject\\' . ucfirst($this->class) . '\\Listing';
             $this->list = new $objectList();
 
@@ -66,6 +67,9 @@ class DefaultAdapter implements AddressSourceAdapterInterface
      */
     public function getMailAddressesForBatchSending(): array
     {
+        if (!$this->class) {
+            return [];
+        }
         $listing = $this->getListing();
         $ids = $listing->loadIdList();
 
@@ -75,7 +79,7 @@ class DefaultAdapter implements AddressSourceAdapterInterface
         $emails = [];
 
         if (count($ids) > 0) {
-            $db = \Pimcore\Db::get();
+            $db = Db::get();
             $emails = $db->fetchFirstColumn("SELECT email FROM $tableName WHERE id IN (" . implode(',', $ids) . ')');
         }
 
@@ -92,6 +96,16 @@ class DefaultAdapter implements AddressSourceAdapterInterface
      */
     public function getParamsForTestSending(string $emailAddress): SendingParamContainer
     {
+        if (!$this->class) {
+            return new SendingParamContainer($emailAddress, [
+                'gender' => '',
+                'firstname' => '',
+                'lastname' => '',
+                'email' => $emailAddress,
+                'token' => 'token',
+                'object' => null,
+            ]);
+        }
         $listing = $this->getListing();
         $listing->setOrderKey('RAND()', false);
         $listing->setLimit(1);
@@ -114,7 +128,9 @@ class DefaultAdapter implements AddressSourceAdapterInterface
      */
     public function getTotalRecordCount(): int
     {
-        $this->getListing();
+        if ($this->class) {
+            $this->getListing();
+        }
 
         return $this->elementsTotal;
     }
@@ -124,6 +140,9 @@ class DefaultAdapter implements AddressSourceAdapterInterface
      */
     public function getParamsForSingleSending(int $limit, int $offset): array
     {
+        if (!$this->class) {
+            return [];
+        }
         $listing = $this->getListing();
         $listing->setLimit($limit);
         $listing->setOffset($offset);
