@@ -96,30 +96,33 @@ class DefaultAdapter implements AddressSourceAdapterInterface
      */
     public function getParamsForTestSending(string $emailAddress): SendingParamContainer
     {
-        if (!$this->class) {
-            return new SendingParamContainer($emailAddress, [
-                'gender' => '',
-                'firstname' => '',
-                'lastname' => '',
-                'email' => $emailAddress,
-                'token' => 'token',
-                'object' => null,
-            ]);
-        }
-        $listing = $this->getListing();
-        $listing->setOrderKey('RAND()', false);
-        $listing->setLimit(1);
-        $listing->setOffset(0);
+        if ($this->class) {
+            $listing = $this->getListing();
+            $listing->setOrderKey('RAND()', false);
+            $listing->setLimit(1);
+            $listing->setOffset(0);
 
-        $object = current($listing->load());
+            $object = $listing->current();
+
+            if ($object) {
+                return new SendingParamContainer($emailAddress, [
+                    'gender' => method_exists($object, 'getGender') ? $object->getGender() : '',
+                    'firstname' => method_exists($object, 'getFirstname') ? $object->getFirstname() : '',
+                    'lastname' => method_exists($object, 'getLastname') ? $object->getLastname() : '',
+                    'email' => $emailAddress,
+                    'token' => 'token',
+                    'object' => $object,
+                ]);
+            }
+        }
 
         return new SendingParamContainer($emailAddress, [
-            'gender' => method_exists($object, 'getGender') ? $object->getGender() : '',
-            'firstname' => method_exists($object, 'getFirstname') ? $object->getFirstname() : '',
-            'lastname' => method_exists($object, 'getLastname') ? $object->getLastname() : '',
+            'gender' => '',
+            'firstname' => '',
+            'lastname' => '',
             'email' => $emailAddress,
             'token' => 'token',
-            'object' => $object,
+            'object' => null,
         ]);
     }
 
