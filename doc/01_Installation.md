@@ -6,7 +6,7 @@
 ## Installation Process
 
 Install bundle via composer:
-```bash 
+```bash
 composer require pimcore/newsletter-bundle
 ```
 
@@ -44,10 +44,9 @@ framework:
         enabled: true
         transports:
             pimcore_newsletter: smtp://user:pass@smtp.example.com:port
-        messenger:
-            routing:
-                'Pimcore\Bundle\NewsletterBundle\Messenger\SendNewsletterMessage': pimcore_core    
-
+    messenger:
+        routing:
+            'Pimcore\Bundle\NewsletterBundle\Messenger\SendNewsletterMessage': pimcore_core
 ```
 
 ```yaml
@@ -64,8 +63,7 @@ pimcore_newsletter:
     debug:
         email_addresses: 'han.solo@pimcore.com,luke.skywalker@pimcore.com'
     use_specific: true
-    default_url_prefix: 'https://my-host.com'    
-    
+    default_url_prefix: 'https://my-host.com'
 ```
 
 
@@ -85,7 +83,7 @@ See [Newsletter Config](./19_Newsletter_Config.md) for a complete example and ho
 ## Document Types
 This bundle introduces a new document type:
 
-| Type                                           | Description                                   | 
+| Type                                           | Description                                   |
 |------------------------------------------------|-----------------------------------------------|
 | [Newsletter](./05_Newsletter_Documents.md) | Like an email but specialized for newsletter |
 
