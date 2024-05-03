@@ -143,8 +143,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/checksql", name="checksql", methods={"POST"})
-     *
-     *
      */
     public function checksqlAction(Request $request): JsonResponse
     {
@@ -154,19 +152,22 @@ class NewsletterController extends DocumentControllerBase
         $success = false;
 
         try {
-            $className = '\\Pimcore\\Model\\DataObject\\' . ucfirst($request->get('class')) . '\\Listing';
-            /** @var Pimcore\Model\DataObject\Listing $list */
-            $list = new $className();
+            if ($class = $request->request->get('class')) {
+                $className = '\\Pimcore\\Model\\DataObject\\' . ucfirst($class) . '\\Listing';
+                /** @var Pimcore\Model\DataObject\Listing $list */
+                $list = new $className();
 
-            $conditions = ['(newsletterActive = 1 AND newsletterConfirmed = 1)'];
-            if ($request->get('objectFilterSQL')) {
-                $conditions[] = $request->get('objectFilterSQL');
+                $conditions = ['(newsletterActive = 1 AND newsletterConfirmed = 1)'];
+                if ($objectFilterSQL = $request->request->get('objectFilterSQL')) {
+                    $conditions[] = $objectFilterSQL;
+                }
+                $list->setCondition(implode(' AND ', $conditions));
+
+                // Use getDao() because __call method will log exceptions
+                $count = $list->getDao()->getTotalCount();
+                $success = true;
             }
-            $list->setCondition(implode(' AND ', $conditions));
-
-            $count = $list->getTotalCount();
-            $success = true;
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
 
         return $this->adminJson([
@@ -177,7 +178,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/get-available-classes", name="getavailableclasses", methods={"GET"})
-     *
      */
     public function getAvailableClassesAction(): JsonResponse
     {
@@ -206,8 +206,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/get-available-reports", name="getavailablereports", methods={"GET"})
-     *
-     *
      */
     public function getAvailableReportsAction(Request $request): JsonResponse
     {
@@ -246,8 +244,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/get-send-status", name="getsendstatus", methods={"GET"})
-     *
-     *
      */
     public function getSendStatusAction(Request $request): JsonResponse
     {
@@ -267,8 +263,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/stop-send", name="stopsend", methods={"POST"})
-     *
-     *
      */
     public function stopSendAction(Request $request): JsonResponse
     {
@@ -320,8 +314,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/calculate", name="calculate", methods={"POST"})
-     *
-     *
      */
     public function calculateAction(Request $request): JsonResponse
     {
