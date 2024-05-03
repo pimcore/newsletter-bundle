@@ -163,7 +163,7 @@ class NewsletterController extends DocumentControllerBase
                 }
                 $list->setCondition(implode(' AND ', $conditions));
 
-                // Use getDao() because __call method will log exceptions
+                // Use getDao(), because AbstractModel::__call() method generates error log entries
                 $count = $list->getDao()->getTotalCount();
                 $success = true;
             }
