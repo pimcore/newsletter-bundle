@@ -117,7 +117,7 @@ class NewsletterController extends FrontendController
 
         $newsletter = new Newsletter('person'); // replace "person" with the class name you have used for your class above (mailing list)
 
-        if ($newsletter->confirm($request->get('token'))) {
+        if ($newsletter->confirm($request->request->getString('token'))) {
             $success = true;
         }
 
@@ -131,14 +131,14 @@ class NewsletterController extends FrontendController
         $unsubscribeMethod = null;
         $success = false;
 
-        if ($request->get('email')) {
+        if ($request->request->getString('email')) {
             $unsubscribeMethod = 'email';
-            $success = $newsletter->unsubscribeByEmail($request->get('email'));
+            $success = $newsletter->unsubscribeByEmail($request->request->getString('email'));
         }
 
-        if ($request->get('token')) {
+        if ($request->request->getString('token')) {
             $unsubscribeMethod = 'token';
-            $success = $newsletter->unsubscribeByToken($request->get('token'));
+            $success = $newsletter->unsubscribeByToken($request->request->getString('token'));
         }
 
         return $this->render('Newsletter/unsubscribe.html.twig', [

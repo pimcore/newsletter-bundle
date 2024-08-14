@@ -56,7 +56,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $email = Newsletter::getById((int)$request->get('id'));
+        $email = Newsletter::getById($request->query->getInt('id'));
 
         if (!$email) {
             throw $this->createNotFoundException('Document not found');
@@ -103,7 +103,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $page = Newsletter::getById((int) $request->get('id'));
+        $page = Newsletter::getById($request->request->getInt('id'));
         if (!$page) {
             throw $this->createNotFoundException('Document not found');
         }
@@ -143,8 +143,8 @@ class NewsletterController extends DocumentControllerBase
         $this->addPropertiesToDocument($request, $document);
 
         // plaintext
-        if ($request->get('plaintext')) {
-            $plaintext = $this->decodeJson($request->get('plaintext'));
+        if ($request->request->get('plaintext')) {
+            $plaintext = $this->decodeJson($request->request->get('plaintext'));
             $document->setValues($plaintext);
         }
     }
@@ -164,13 +164,13 @@ class NewsletterController extends DocumentControllerBase
         $success = false;
 
         try {
-            $className = '\\Pimcore\\Model\\DataObject\\' . ucfirst($request->get('class')) . '\\Listing';
+            $className = '\\Pimcore\\Model\\DataObject\\' . ucfirst($request->request->getString('class')) . '\\Listing';
             /** @var Pimcore\Model\DataObject\Listing $list */
             $list = new $className();
 
             $conditions = ['(newsletterActive = 1 AND newsletterConfirmed = 1)'];
-            if ($request->get('objectFilterSQL')) {
-                $conditions[] = $request->get('objectFilterSQL');
+            if ($request->request->getString('objectFilterSQL')) {
+                $conditions[] = $request->request->getString('objectFilterSQL');
             }
             $list->setCondition(implode(' AND ', $conditions));
 
@@ -226,7 +226,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $task = $request->get('task');
+        $task = $request->query->getString('task');
 
         if ($task === 'list') {
             $reportList = Config::getReportsList();
@@ -240,7 +240,7 @@ class NewsletterController extends DocumentControllerBase
         }
 
         if ($task === 'fieldNames') {
-            $reportId = $request->get('reportId');
+            $reportId = $request->query->getString('reportId');
             $report = Config::getByName($reportId);
             $columnConfiguration = $report !== null ? $report->getColumnConfiguration() : [];
 
@@ -268,7 +268,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $document = Newsletter::getById((int) $request->get('id'));
+        $document = Newsletter::getById($request->query->getInt('id'));
         if (!$document) {
             throw $this->createNotFoundException('Newsletter not found');
         }
@@ -291,7 +291,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $document = Newsletter::getById((int) $request->get('id'));
+        $document = Newsletter::getById($request->request->getInt('id'));
         if (!$document) {
             throw $this->createNotFoundException('Newsletter not found');
         }
@@ -316,7 +316,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $document = Newsletter::getById((int) $request->get('id'));
+        $document = Newsletter::getById($request->request->getInt('id'));
         if (!$document) {
             throw $this->createNotFoundException('Newsletter not found');
         }
@@ -327,8 +327,8 @@ class NewsletterController extends DocumentControllerBase
 
         TmpStore::add($document->getTmpStoreId(), [
             'documentId' => $document->getId(),
-            'addressSourceAdapterName' => $request->get('addressAdapterName'),
-            'adapterParams' => json_decode($request->get('adapterParams'), true),
+            'addressSourceAdapterName' => $request->request->getString('addressAdapterName'),
+            'adapterParams' => json_decode($request->request->getString('adapterParams'), true),
             'inProgress' => false,
             'progress' => 0,
         ], 'newsletter');
@@ -351,8 +351,8 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $addressSourceAdapterName = $request->get('addressAdapterName');
-        $adapterParams = json_decode($request->get('adapterParams'), true);
+        $addressSourceAdapterName = $request->request->getString('addressAdapterName');
+        $adapterParams = json_decode($request->request->getString('adapterParams'), true);
         $serviceLocator = \Pimcore::getContainer()->get('pimcore_newsletter.address_source_adapter.factories');
 
         if (!$serviceLocator->has($addressSourceAdapterName)) {
@@ -384,13 +384,13 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $document = Newsletter::getById((int) $request->get('id'));
+        $document = Newsletter::getById($request->request->getInt('id'));
         if (!$document) {
             throw $this->createNotFoundException('Newsletter not found');
         }
-        $addressSourceAdapterName = $request->get('addressAdapterName');
-        $adapterParams = json_decode($request->get('adapterParams'), true);
-        $testMailAddress = $request->get('testMailAddress');
+        $addressSourceAdapterName = $request->request->getString('addressAdapterName');
+        $adapterParams = json_decode($request->request->getString('adapterParams'), true);
+        $testMailAddress = $request->request->getString('testMailAddress');
 
         if (empty($testMailAddress)) {
             return $this->adminJson([
