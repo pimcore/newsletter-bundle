@@ -143,8 +143,8 @@ class NewsletterController extends DocumentControllerBase
         $this->addPropertiesToDocument($request, $document);
 
         // plaintext
-        if ($request->request->get('plaintext')) {
-            $plaintext = $this->decodeJson($request->request->get('plaintext'));
+        if ($request->request->getString('plaintext')) {
+            $plaintext = $this->decodeJson($request->request->getString('plaintext'));
             $document->setValues($plaintext);
         }
     }
