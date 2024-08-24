@@ -41,7 +41,6 @@ class Newsletter
     protected DataObject\ClassDefinition $class;
 
     /**
-     *
      * @throws Exception
      */
     public function __construct(string $classId)
@@ -62,8 +61,6 @@ class Newsletter
     }
 
     /**
-     *
-     *
      * @throws Exception
      */
     public static function prepareMail(
@@ -145,7 +142,6 @@ class Newsletter
     }
 
     /**
-     *
      * @throws Exception
      */
     public static function sendNewsletterDocumentBasedMail(Mail $mail, SendingParamContainer $sendingContainer): void
@@ -228,8 +224,6 @@ class Newsletter
     }
 
     /**
-     *
-     *
      * @throws Exception
      */
     public function subscribe(array $params): DataObject\Concrete
@@ -293,7 +287,6 @@ class Newsletter
     }
 
     /**
-     *
      * @throws Exception
      */
     public function sendConfirmationMail(DataObject\Concrete $object, Email $mailDocument, array $params = []): void
@@ -353,8 +346,6 @@ class Newsletter
     }
 
     /**
-     *
-     *
      * @throws Exception
      */
     public function confirm(string $token): bool
@@ -380,8 +371,6 @@ class Newsletter
     }
 
     /**
-     *
-     *
      * @throws Exception
      */
     public function unsubscribeByToken(string $token): bool
@@ -396,8 +385,6 @@ class Newsletter
     }
 
     /**
-     *
-     *
      * @throws Exception
      */
     public function unsubscribeByEmail(string $email): bool
@@ -416,8 +403,6 @@ class Newsletter
     }
 
     /**
-     *
-     *
      * @throws Exception
      */
     public function unsubscribe(DataObject\Concrete $object): bool
@@ -452,8 +437,6 @@ class Newsletter
     /**
      * Checks if e-mail address already
      * exists in the database.
-     *
-     *
      */
     public function isEmailExists(array $params): bool
     {
@@ -478,11 +461,13 @@ class Newsletter
 
     /**
      * Checks if domain of email has a MX record
-     *
-     *
      */
     public static function to_domain_exists(string $email): bool
     {
+        if (!str_contains($email, '@')) {
+            return false;
+        }
+
         [, $domain] = explode('@', $email);
 
         return checkdnsrr($domain, 'MX');
