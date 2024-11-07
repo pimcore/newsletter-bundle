@@ -79,7 +79,7 @@ class Installer extends SettingsStoreAwareInstaller
         foreach (self::USER_PERMISSIONS as $permission) {
             // check if the permission already exists
             $permissionExists = $db->executeStatement('SELECT `key` FROM users_permission_definitions WHERE `key` = :key', ['key' => $permission]);
-            if(!$permissionExists) {
+            if (!$permissionExists) {
                 $db->insert('users_permission_definitions', [
                     $db->quoteIdentifier('key') => $permission,
                     $db->quoteIdentifier('category') => self::USER_PERMISSION_CATEGORY,
@@ -139,11 +139,11 @@ class Installer extends SettingsStoreAwareInstaller
 
     private function removeNewsLetterDocTypes(): void
     {
-        foreach(SettingsStore::getIdsByScope(self::SETTINGS_STORE_SCOPE) as $id) {
+        foreach (SettingsStore::getIdsByScope(self::SETTINGS_STORE_SCOPE) as $id) {
             $newsletterDocType = SettingsStore::get($id, self::SETTINGS_STORE_SCOPE);
-            if($newsletterDocType) {
+            if ($newsletterDocType) {
                 $data = json_decode($newsletterDocType->getData(), true);
-                if(!empty($data) && $data['type'] === self::DOCTYPE) {
+                if (!empty($data) && $data['type'] === self::DOCTYPE) {
                     SettingsStore::delete($id, self::SETTINGS_STORE_SCOPE);
                 }
             }
