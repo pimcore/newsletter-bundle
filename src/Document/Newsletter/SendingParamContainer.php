@@ -34,7 +34,7 @@ class SendingParamContainer
      * SendingParamContainer constructor.
      *
      */
-    public function __construct(string $email, array $params = null)
+    public function __construct(string $email, ?array $params = null)
     {
         $this->email = $email;
         $this->params = $params;
