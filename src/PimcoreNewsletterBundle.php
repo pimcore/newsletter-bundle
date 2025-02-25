@@ -18,17 +18,24 @@ namespace Pimcore\Bundle\NewsletterBundle;
 
 use Pimcore\Bundle\AdminBundle\PimcoreAdminBundle;
 use Pimcore\Bundle\NewsletterBundle\DependencyInjection\Compiler\CustomReportsPass;
+use Pimcore\Bundle\NewsletterBundle\DependencyInjection\PimcoreNewsletterExtension;
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
 use Pimcore\Extension\Bundle\PimcoreBundleAdminClassicInterface;
 use Pimcore\Extension\Bundle\Traits\BundleAdminClassicTrait;
 use Pimcore\Extension\Bundle\Traits\PackageVersionTrait;
 use Pimcore\HttpKernel\BundleCollection\BundleCollection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class PimcoreNewsletterBundle extends AbstractPimcoreBundle implements PimcoreBundleAdminClassicInterface
 {
     use BundleAdminClassicTrait;
     use PackageVersionTrait;
+
+    public function getContainerExtension(): ExtensionInterface
+    {
+        return new PimcoreNewsletterExtension();
+    }
 
     public function getJsPaths(): array
     {
