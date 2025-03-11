@@ -34,20 +34,18 @@ use RuntimeException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * @Route("/newsletter", name="pimcore_bundle_newsletter_document_newsletter_")
- *
  * @internal
  */
+#[Route('/newsletter', name: 'pimcore_bundle_newsletter_document_newsletter_')]
 class NewsletterController extends DocumentControllerBase
 {
     /**
-     * @Route("/get-data-by-id", name="getdatabyid", methods={"GET"})
-     *
      * @throws Exception
      */
+    #[Route('/get-data-by-id', name: 'getdatabyid', methods: ['GET'])]
     public function getDataByIdAction(Request $request): JsonResponse
     {
         $this->checkPermission('newsletters');
@@ -87,10 +85,9 @@ class NewsletterController extends DocumentControllerBase
     }
 
     /**
-     * @Route("/save", name="save", methods={"PUT", "POST"})
-     *
      * @throws Exception
      */
+    #[Route('/save', name: 'save', methods: ['PUT', 'POST'])]
     public function saveAction(Request $request): JsonResponse
     {
         $this->checkPermission('newsletters');
@@ -141,9 +138,7 @@ class NewsletterController extends DocumentControllerBase
         }
     }
 
-    /**
-     * @Route("/checksql", name="checksql", methods={"POST"})
-     */
+    #[Route('/checksql', name: 'checksql', methods: ['POST'])]
     public function checksqlAction(Request $request): JsonResponse
     {
         $this->checkPermission('newsletters');
@@ -176,9 +171,7 @@ class NewsletterController extends DocumentControllerBase
         ]);
     }
 
-    /**
-     * @Route("/get-available-classes", name="getavailableclasses", methods={"GET"})
-     */
+    #[Route('/get-available-classes', name: 'getavailableclasses', methods: ['GET'])]
     public function getAvailableClassesAction(): JsonResponse
     {
         $this->checkPermission('newsletters');
@@ -204,9 +197,7 @@ class NewsletterController extends DocumentControllerBase
         return $this->adminJson(['data' => $availableClasses]);
     }
 
-    /**
-     * @Route("/get-available-reports", name="getavailablereports", methods={"GET"})
-     */
+    #[Route('/get-available-reports', name: 'getavailablereports', methods: ['GET'])]
     public function getAvailableReportsAction(Request $request): JsonResponse
     {
         $this->checkPermission('newsletters');
@@ -242,9 +233,7 @@ class NewsletterController extends DocumentControllerBase
         return $this->adminJson(['success' => false]);
     }
 
-    /**
-     * @Route("/get-send-status", name="getsendstatus", methods={"GET"})
-     */
+    #[Route('/get-send-status', name: 'getsendstatus', methods: ['GET'])]
     public function getSendStatusAction(Request $request): JsonResponse
     {
         $this->checkPermission('newsletters');
@@ -261,9 +250,7 @@ class NewsletterController extends DocumentControllerBase
         ]);
     }
 
-    /**
-     * @Route("/stop-send", name="stopsend", methods={"POST"})
-     */
+    #[Route('/stop-send', name: 'stopsend', methods: ['POST'])]
     public function stopSendAction(Request $request): JsonResponse
     {
         $this->checkPermission('newsletters');
@@ -280,10 +267,9 @@ class NewsletterController extends DocumentControllerBase
     }
 
     /**
-     * @Route("/send", name="send", methods={"POST"})
-     *
      * @throws Exception
      */
+    #[Route('/send', name: 'send', methods: ['POST'])]
     public function sendAction(Request $request, MessageBusInterface $messengerBusPimcoreCore): JsonResponse
     {
         $this->checkPermission('newsletters');
@@ -312,9 +298,7 @@ class NewsletterController extends DocumentControllerBase
         return $this->adminJson(['success' => true]);
     }
 
-    /**
-     * @Route("/calculate", name="calculate", methods={"POST"})
-     */
+    #[Route('/calculate', name: 'calculate', methods: ['POST'])]
     public function calculateAction(Request $request): JsonResponse
     {
         $this->checkPermission('newsletters');
@@ -340,10 +324,9 @@ class NewsletterController extends DocumentControllerBase
     }
 
     /**
-     * @Route("/send-test", name="sendtest", methods={"POST"})
-     *
      * @throws Exception
      */
+    #[Route('/send-test', name: 'sendtest', methods: ['POST'])]
     public function sendTestAction(Request $request): JsonResponse
     {
         $this->checkPermission('newsletters');
