@@ -2,10 +2,34 @@ pimcore.registerNS("pimcore.bundle.newsletter.startup");
 
 pimcore.bundle.newsletter.startup = Class.create({
     type: 'newsletter',
-
+    perspectivePermissions: [
+        'items.addNewsletter',
+        'items.addBlankNewsletter'  
+    ],
+ 
     initialize: function () {
+        if (pimcore.events.onPerspectiveEditorLoadPermissions) {
+            document.addEventListener(pimcore.events.onPerspectiveEditorLoadPermissions, this.perspectiveEditorLoadPermissions.bind(this));
+        }
+
         document.addEventListener(pimcore.events.prepareDocumentTreeContextMenu, this.onPrepareDocumentTreeContextMenu.bind(this));
     },
+
+    onPerspectiveEditorLoadPermissions: function (e) {
+        const context = e.detail.context;
+        const menu = e.detail.menu;
+        const permissions = e.detail.permissions;
+
+        if(context === 'customViewContextMenu' &&
+            menu === 'document'
+        ) {
+            this.perspectivePermissions.forEach((permission) => {
+                if (permissions[context][menu].indexOf(permission) === -1) {
+                    permissions[context][menu].push(permission);
+                }
+            });
+        }
+    } 
 
     onPrepareDocumentTreeContextMenu: function (e) {
         let user = pimcore.globalmanager.get("user");

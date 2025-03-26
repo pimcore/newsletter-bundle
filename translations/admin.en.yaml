@@ -1,3 +1,5 @@
+plugin_pimcore_perspectiveeditor_document_items_addNewsletter: "Add Newsletter"
+plugin_pimcore_perspectiveeditor_document_items_addBlankNewsletter: "Add Blank Newsletter"
 newsletter: 'Newsletter'
 newsletters: 'Newsletters'
 add_newsletter: 'Add Newsletter'
