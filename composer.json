@@ -1,6 +1,6 @@
 {
   "name": "pimcore/newsletter-bundle",
-  "license": "Pimcore Open Core License (POCL)",
+  "license": "proprietary",
   "type": "pimcore-bundle",
   "description": "Pimcore Newsletter Bundle",
   "config": {
