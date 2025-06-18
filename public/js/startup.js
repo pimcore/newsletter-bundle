@@ -29,7 +29,7 @@ pimcore.bundle.newsletter.startup = Class.create({
                 }
             });
         }
-    } 
+    },
 
     onPrepareDocumentTreeContextMenu: function (e) {
         let user = pimcore.globalmanager.get("user");
