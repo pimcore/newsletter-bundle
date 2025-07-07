@@ -126,8 +126,6 @@ class Newsletter
 
             $html->clear();
             unset($html);
-
-            $mail->html($contentHTML);
         }
 
         $mail->html($contentHTML);
