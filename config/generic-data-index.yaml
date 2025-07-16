@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    pimcore.newsletter_bundle.generic_data_index.asset.boolean-adapter:
+        class: Pimcore\Bundle\GenericDataIndexBundle\SearchIndexAdapter\DefaultSearch\DataObject\FieldDefinitionAdapter\BooleanAdapter
+        shared: false
+        tags:
+            - { name: "pimcore.generic_data_index.data-object.search_index_field_definition", type: "newsletterActive" }
+            - { name: "pimcore.generic_data_index.data-object.search_index_field_definition", type: "newsletterConfirmed" }
