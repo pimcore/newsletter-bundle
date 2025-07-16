@@ -30,6 +30,7 @@ class PimcoreNewsletterExtension extends ConfigurableExtension
 
         $loader->load('services.yaml');
         $loader->load('message_handler.yaml');
+        $loader->load('generic-data-index.yaml');
 
         $container->setParameter('pimcore_newsletter', $config);
 
