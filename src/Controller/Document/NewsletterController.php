@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\NewsletterBundle\Controller\Document;
 
+use Pimcore\Helper\ParameterBagHelper;
 use Exception;
 use Pimcore;
 use Pimcore\Bundle\AdminBundle\Controller\Admin\Document\DocumentControllerBase;
@@ -47,7 +48,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $email = Newsletter::getById($request->query->getInt('id'));
+        $email = Newsletter::getById(ParameterBagHelper::getInt($request->query, 'id'));
 
         if (!$email) {
             throw $this->createNotFoundException('Document not found');
@@ -89,7 +90,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $page = Newsletter::getById($request->request->getInt('id'));
+        $page = Newsletter::getById(ParameterBagHelper::getInt($request->request, 'id'));
         if (!$page) {
             throw $this->createNotFoundException('Document not found');
         }
@@ -235,7 +236,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $document = Newsletter::getById($request->query->getInt('id'));
+        $document = Newsletter::getById(ParameterBagHelper::getInt($request->query, 'id'));
         if (!$document) {
             throw $this->createNotFoundException('Newsletter not found');
         }
@@ -252,7 +253,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $document = Newsletter::getById($request->request->getInt('id'));
+        $document = Newsletter::getById(ParameterBagHelper::getInt($request->request, 'id'));
         if (!$document) {
             throw $this->createNotFoundException('Newsletter not found');
         }
@@ -271,7 +272,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $document = Newsletter::getById($request->request->getInt('id'));
+        $document = Newsletter::getById(ParameterBagHelper::getInt($request->request, 'id'));
         if (!$document) {
             throw $this->createNotFoundException('Newsletter not found');
         }
@@ -328,7 +329,7 @@ class NewsletterController extends DocumentControllerBase
     {
         $this->checkPermission('newsletters');
 
-        $document = Newsletter::getById($request->request->getInt('id'));
+        $document = Newsletter::getById(ParameterBagHelper::getInt($request->request, 'id'));
         if (!$document) {
             throw $this->createNotFoundException('Newsletter not found');
         }
