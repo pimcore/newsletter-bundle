@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\NewsletterBundle\Controller\Document;
 
-use Pimcore\Helper\ParameterBagHelper;
 use Exception;
 use Pimcore;
 use Pimcore\Bundle\AdminBundle\Controller\Admin\Document\DocumentControllerBase;
@@ -23,6 +22,7 @@ use Pimcore\Bundle\NewsletterBundle\Model\DataObject\ClassDefinition\Data\Newsle
 use Pimcore\Bundle\NewsletterBundle\Model\DataObject\ClassDefinition\Data\NewsletterConfirmed;
 use Pimcore\Bundle\NewsletterBundle\Model\Document\Newsletter;
 use Pimcore\Bundle\NewsletterBundle\Tool\Newsletter as NewsletterTool;
+use Pimcore\Helper\ParameterBagHelper;
 use Pimcore\Model\DataObject\ClassDefinition\Data\Email;
 use Pimcore\Model\DataObject\ClassDefinition\Listing;
 use Pimcore\Model\Document;
