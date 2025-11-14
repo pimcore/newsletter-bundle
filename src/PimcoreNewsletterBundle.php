@@ -24,10 +24,22 @@ use Pimcore\HttpKernel\BundleCollection\BundleCollection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
+/**
+ * @deprecated version 2.3
+ */
 class PimcoreNewsletterBundle extends AbstractPimcoreBundle implements PimcoreBundleAdminClassicInterface
 {
     use BundleAdminClassicTrait;
     use PackageVersionTrait;
+
+    public function __construct()
+    {
+        trigger_deprecation(
+            'pimcore/newsletter-bundle',
+            '2.3',
+            'The NewsletterBundle is deprecated and will be discontinued with Pimcore Studio.'
+        );
+    }
 
     public function getContainerExtension(): ExtensionInterface
     {
