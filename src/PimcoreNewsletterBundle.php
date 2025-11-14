@@ -35,9 +35,9 @@ class PimcoreNewsletterBundle extends AbstractPimcoreBundle implements PimcoreBu
     public function __construct()
     {
         trigger_deprecation(
-            'pimcore/google-marketing-bundle',
-            '2.1',
-            'The GoogleMarketingBundle is deprecated and will be discontinued with Pimcore Studio.'
+            'pimcore/newsletter-bundle',
+            '2.3',
+            'The NewsletterBundle is deprecated and will be discontinued with Pimcore Studio.'
         );
     }
 
