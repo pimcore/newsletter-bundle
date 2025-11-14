@@ -3,6 +3,10 @@ title: Newsletter Module
 ---
 
 # Pimcore Newsletter Bundle
+
+> [!WARNING]
+> This bundle won't be migrated to Pimcore Studio and therefore will be deprecated with 2.3.
+
 This bundle provides a basic newsletter framework with the advantage to use all the data that is already stored in the system.
 
 ## Features in a Nutshell 
